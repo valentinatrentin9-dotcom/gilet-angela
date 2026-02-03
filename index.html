@@ -58,10 +58,11 @@
 <h2>Design</h2>
 <div class="box">
   <label>Fit</label>
-  <select>
-    <option>Regular</option>
-    <option>Oversize</option>
+  <select id="fit">
+    <option value="regular">Regular</option>
+    <option value="oversize">Oversize</option>
   </select>
+  <img id="preview" src="img/regular.jpg" style="max-width: 300px; border-radius:12px; border:1px solid #ddd;">
 
   <label>Lunghezza</label>
   <select>
@@ -117,5 +118,17 @@
   <input type="text" placeholder="Scrivi il colore che preferisci">
 </div>
 
+  <script>
+  const fitSelect = document.getElementById("fit");
+  const previewImg = document.getElementById("preview");
+
+  fitSelect.addEventListener("change", () => {
+    const fit = fitSelect.value; // "regular" o "oversize"
+    previewImg.src = `img/${fit}.jpg`;
+  });
+</script>
+
+  
 </body>
 </html>
+
