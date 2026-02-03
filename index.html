@@ -3,10 +3,119 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gilet di Angela</title>
+  <title>Il gilet di Angela</title>
+
+  <style>
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:#ffffff;
+      margin:40px;
+      max-width:900px;
+      margin-inline:auto;
+      line-height:1.6;
+    }
+    h1{font-size:28px;}
+    h2{margin-top:40px;}
+    .box{
+      border:1px solid #e5e5e5;
+      border-radius:16px;
+      padding:20px;
+      margin-top:15px;
+    }
+    label{display:block;margin-top:12px;font-weight:500;}
+    select,input{
+      margin-top:6px;
+      padding:8px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      width:100%;
+      max-width:300px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Ciao Angela 💛</h1>
-  <p>Se vedi questa pagina, il link funziona.</p>
+
+<h1>🧶 Il gilet di Angela</h1>
+<p>Scegli le caratteristiche del tuo gilet. Io lo realizzerò su misura per te ❤️</p>
+
+<h2>Taglia</h2>
+<div class="box">
+  <label>Seleziona la taglia</label>
+  <select>
+    <option>XS</option>
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+    <option>XL</option>
+    <option>XXL</option>
+  </select>
+
+  <label>Misure precise (opzionale)</label>
+  <input type="text" placeholder="Seno (cm)">
+</div>
+
+<h2>Design</h2>
+<div class="box">
+  <label>Fit</label>
+  <select>
+    <option>Regular</option>
+    <option>Oversize</option>
+  </select>
+
+  <label>Lunghezza</label>
+  <select>
+    <option>Regular</option>
+    <option>Cropped</option>
+  </select>
+
+  <label>Colletto</label>
+  <select>
+    <option>V-neck</option>
+    <option>Crew neck</option>
+    <option>Altro (scrivi sotto)</option>
+  </select>
+
+  <input type="text" placeholder="Note colletto">
+</div>
+
+<h2>Dettagli</h2>
+<div class="box">
+  <label>Tipo di rib</label>
+  <select>
+    <option>1x1</option>
+    <option>2x2</option>
+    <option>Twisted</option>
+  </select>
+
+  <label>Lunghezza rib</label>
+  <select>
+    <option>Corta</option>
+    <option>Lunga</option>
+  </select>
+
+  <label>Slit</label>
+  <select>
+    <option>No</option>
+    <option>Sì</option>
+  </select>
+</div>
+
+<h2>Lana e colore</h2>
+<div class="box">
+  <label>Filato</label>
+  <select>
+    <option>Drops Baby Merino</option>
+    <option>Drops Merino Extra Fine</option>
+    <option>Drops Lima</option>
+    <option>Drops Nepal</option>
+    <option>Drops Air</option>
+    <option>Drops Alpaca</option>
+  </select>
+
+  <label>Colore</label>
+  <input type="text" placeholder="Scrivi il colore che preferisci">
+</div>
+
 </body>
 </html>
