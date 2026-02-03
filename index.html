@@ -40,20 +40,70 @@
 <p>Scegli le caratteristiche del tuo gilet. Io lo realizzerò su misura per te ❤️</p>
 
 <h2>Taglia</h2>
-<div class="box">
-  <label>Seleziona la taglia</label>
-  <select>
-    <option>XS</option>
-    <option>S</option>
-    <option>M</option>
-    <option>L</option>
-    <option>XL</option>
-    <option>XXL</option>
-  </select>
 
-  <label>Misure precise (opzionale)</label>
-  <input type="text" placeholder="Seno (cm)">
-</div>
+<div class="box" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start;">
+
+  <!-- COLONNA SINISTRA -->
+  <div>
+    <label>Seleziona la taglia</label>
+    <select id="size">
+      <option value="" selected disabled>Scegli…</option>
+      <option value="XS">XS</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+    </select>
+
+    <label>Misure precise (opzionale)</label>
+    <input type="number" placeholder="Seno (cm)">
+    <input type="number" placeholder="Lunghezza desiderata (cm)">
+  </div>
+
+  <!-- COLONNA DESTRA -->
+  <div>
+    <details>
+      <summary style="cursor:pointer; font-weight:600;">📏 Guida alle taglie</summary>
+
+      <div style="margin-top:10px; overflow:auto; border:1px solid #e5e5e5; border-radius:12px;">
+        <table style="border-collapse:collapse; width:100%; min-width:480px;">
+          <thead>
+            <tr style="background:#f7f7f7;">
+              <th style="padding:10px;">Taglia</th>
+              <th style="padding:10px;">Misura busto (persona)</th>
+              <th style="padding:10px;">Circonferenza busto Regular (capo)</th>
+              <th style="padding:10px;">Circonferenza busto Oversize (capo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="row-XS">
+              <td style="padding:10px;">XS</td>
+              <td style="padding:10px;">80–85 cm</td>
+              <td style="padding:10px;">90 cm</td>
+              <td style="padding:10px;">100 cm</td>
+            </tr>
+            <tr id="row-S">
+              <td style="padding:10px;">S</td>
+              <td style="padding:10px;">85–90 cm</td>
+              <td style="padding:10px;">95 cm</td>
+              <td style="padding:10px;">105 cm</td>
+            </tr>
+            <tr id="row-M">
+              <td style="padding:10px;">M</td>
+              <td style="padding:10px;">90–95 cm</td>
+              <td style="padding:10px;">100 cm</td>
+              <td style="padding:10px;">110 cm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin:10px 0 0; font-size:12px; color:#666;">
+        La misura busto è la circonferenza del torace della persona.  
+        Le altre colonne indicano la circonferenza del gilet finito.
+      </p>
+    </details>
+  </div>
+
+
 
 <h2>Design</h2>
 <div class="box">
@@ -128,9 +178,30 @@
     previewImg.src = `img/${fit}.jpg`;
   });
 </script>
+<script>
+  const sizeSelect = document.getElementById("size");
+
+  function highlightRow(){
+    ["XS","S","M"].forEach(s => {
+      const row = document.getElementById("row-" + s);
+      if(row){
+        row.style.background = "";
+      }
+    });
+
+    const selected = sizeSelect.value;
+    const selectedRow = document.getElementById("row-" + selected);
+    if(selectedRow){
+      selectedRow.style.background = "#f3f6ff";
+    }
+  }
+
+  sizeSelect.addEventListener("change", highlightRow);
+</script>
 
   
 </body>
 </html>
+
 
 
