@@ -57,9 +57,10 @@
       top:18px;
     }
     .previewImg{
-      width:100%;
+      width:280px;
       height:auto;
       display:none;
+      margin:12px auto;
     }
     .previewHint{
       padding:14px;
@@ -90,6 +91,13 @@
       .previewInner{position:relative; top:auto;}
       select,input,textarea{max-width:100%;}
     }
+    .hint{
+  font-size:14px;
+  color:#555;
+  margin-top:6px;
+  font-style:italic;
+}
+
   </style>
 </head>
 
@@ -220,13 +228,16 @@
   <div class="box">
     <div class="grid2">
       <div>
-        <label>Tipo di rib (bordi)</label>
-        <select id="ribType">
-          <option value="" selected disabled>Scegli…</option>
-          <option value="1x1">1x1</option>
-          <option value="2x2">2x2</option>
-          <option value="twisted">Twisted</option>
-        </select>
+       <label>Tipo di rib sui bordi</label>
+<select id="rib">
+  <option value="">Scegli...</option>
+  <option value="1x1">Rib 1x1</option>
+  <option value="2x2">Rib 2x2</option>
+  <option value="twisted">Rib twisted</option>
+</select>
+
+<p id="ribDesc" class="hint"></p>
+
       </div>
       <div>
         <label>Lunghezza rib</label>
@@ -500,6 +511,28 @@ Anteprima usata: ${preview}`;
     updatePills();
     updatePreview();
   </script>
+<script>
+const rib = document.getElementById("rib");
+const ribDesc = document.getElementById("ribDesc");
+
+rib.addEventListener("change", () => {
+  const val = rib.value;
+
+  if(val === "1x1"){
+    ribDesc.textContent = "Classico, pulito ed elegante. Tiene bene la forma ed è adatto a uno stile minimal.";
+  }
+  else if(val === "2x2"){
+    ribDesc.textContent = "Più morbido e visibile. Dona un effetto più rilassato e leggermente più elastico.";
+  }
+  else if(val === "twisted"){
+    ribDesc.textContent = "Più compatto ed elastico. Il bordo resta definito nel tempo e dà un effetto più raffinato.";
+  }
+  else{
+    ribDesc.textContent = "";
+  }
+});
+</script>
 
 </body>
 </html>
+
