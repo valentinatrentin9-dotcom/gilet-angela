@@ -92,12 +92,11 @@
       select,input,textarea{max-width:100%;}
     }
     .hint{
-  font-size:14px;
-  color:#555;
-  margin-top:6px;
-  font-style:italic;
-}
-
+      font-size:14px;
+      color:#555;
+      margin-top:6px;
+      font-style:italic;
+    }
   </style>
 </head>
 
@@ -228,17 +227,16 @@
   <div class="box">
     <div class="grid2">
       <div>
-       <label>Tipo di rib sui bordi</label>
-<select id="rib">
-  <option value="">Scegli...</option>
-  <option value="1x1">Rib 1x1</option>
-  <option value="2x2">Rib 2x2</option>
-  <option value="twisted">Rib twisted</option>
-</select>
-
-<p id="ribDesc" class="hint"></p>
-
+        <label>Tipo di rib sui bordi</label>
+        <select id="rib">
+          <option value="" selected>Scegli...</option>
+          <option value="1x1">Rib 1x1</option>
+          <option value="2x2">Rib 2x2</option>
+          <option value="twisted">Rib twisted</option>
+        </select>
+        <p id="ribDesc" class="hint"></p>
       </div>
+
       <div>
         <label>Lunghezza rib</label>
         <select id="ribLen">
@@ -260,20 +258,40 @@
   <!-- LANA -->
   <h2>Lana e colore</h2>
   <div class="box">
-    <label>Filato</label>
-    <select id="yarn">
-      <option value="" selected disabled>Scegli…</option>
-      <option value="drops_baby_merino">DROPS Baby Merino (fine, elastica, super morbida)</option>
-      <option value="drops_merino_extra_fine">DROPS Merino Extra Fine (più stabile, sempre morbida)</option>
-      <option value="drops_lima">DROPS Lima (lana+alpaca, caldo e “adulto”)</option>
-      <option value="drops_nepal">DROPS Nepal (più grosso, cozy, cresce veloce)</option>
-      <option value="drops_air">DROPS Air (soffice e leggero, effetto “nuvola”)</option>
-      <option value="drops_alpaca">DROPS Alpaca (cade tanto, drape, può mollare)</option>
-    </select>
+    <div class="designGrid">
+      <!-- sinistra -->
+      <div>
+        <label>Filato</label>
+        <select id="yarn">
+          <option value="" selected disabled>Scegli…</option>
+          <option value="baby">DROPS Baby Merino — fine, morbida, elastica (look pulito)</option>
+          <option value="lima">DROPS Lima — lana+alpaca, caldo e “adulto”, ottima caduta</option>
+          <option value="air">DROPS Air — soffice e leggero, effetto “nuvola”</option>
+          <option value="alpaca">DROPS Alpaca — come il mio cardigan violetto: drape, cade molto</option>
+          <option value="puna">DROPS Puna — molto morbida, look “premium”, ottima per un gilet caldo ma elegante</option>
+          <option value="karisma">DROPS Karisma — lana classica e resistente, tiene la forma (più “strutturata”)</option>
+        </select>
 
-    <label>Colore</label>
-    <input id="color" type="text" placeholder="es. grigio fumo / panna / nero / blu notte…">
-    <p class="muted">Nota: Baby Merino è elastica. Per un fit più baggy spesso conviene Oversized (io farò un campione e adatterò il pattern).</p>
+        <p class="muted" style="margin-top:10px;">
+          <a id="yarnLink" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+            🔗 Scegli il colore del filato
+          </a>
+        </p>
+
+        <label>Colore scelto (scrivilo qui)</label>
+        <input id="color" type="text" placeholder="es. 17, Misty Blue / panna / grigio fumo…">
+        <p class="muted">Poi copia qui il nome/codice colore (es. 17, Misty Blue).</p>
+      </div>
+
+      <!-- destra -->
+      <div class="previewInner">
+        <div class="previewCard">
+          <img id="yarnImg" class="previewImg" alt="Anteprima filato">
+          <div id="yarnHint" class="previewHint">Seleziona un filato per vedere l’anteprima 🧶</div>
+        </div>
+        <p id="yarnImgPath" class="muted" style="margin-top:10px;"></p>
+      </div>
+    </div>
   </div>
 
   <!-- CONFERMA -->
@@ -319,7 +337,7 @@
     sizeSelect.addEventListener("change", highlightRow);
 
     // -------------------------
-    // 2) PREVIEW DINAMICA (progressiva)
+    // 2) PREVIEW DINAMICA (progressiva) - DESIGN
     // -------------------------
     const fitSelect  = document.getElementById("fit");
     const lenSelect  = document.getElementById("len");
@@ -345,19 +363,10 @@
       const len  = lenSelect.value;     // regular / cropped
       const neck = neckSelect.value;    // v / crew / other
 
-      // Nessun fit → niente preview
       if(!fit) return null;
-
-      // Se ha fit ma non lunghezza → usa immagine solo fit
       if(!len) return `${fit}.jpg`;
-
-      // Se ha fit+len ma non colletto → usa immagine fit+len
       if(!neck) return `${fit}_${len}.jpg`;
-
-      // Se colletto other → niente immagine dedicata, usa fit+len
       if(neck === "other") return `${fit}_${len}.jpg`;
-
-      // Tutto scelto → immagine completa fit_len_neck
       return `${fit}_${len}_${neck}.jpg`;
     }
 
@@ -376,7 +385,6 @@
       const filename = chooseFilename();
       const path = `img/${filename}`;
 
-      // Messaggio diverso se neck = other
       if(neckSelect.value === "other"){
         previewHint.textContent = "Colletto personalizzato: descrivilo nel campo note 💛 (anteprima basata su Fit + Lunghezza)";
       } else {
@@ -402,12 +410,89 @@
     });
 
     // -------------------------
-    // 3) MODAL + RIEPILOGO + DOWNLOAD
+    // 3) DESCRIZIONE RIB
+    // -------------------------
+    const rib = document.getElementById("rib");
+    const ribDesc = document.getElementById("ribDesc");
+
+    rib.addEventListener("change", () => {
+      const val = rib.value;
+
+      if(val === "1x1"){
+        ribDesc.textContent = "Classico, pulito ed elegante. Tiene bene la forma ed è adatto a uno stile minimal.";
+      }
+      else if(val === "2x2"){
+        ribDesc.textContent = "Più morbido e visibile. Dona un effetto più rilassato e leggermente più elastico.";
+      }
+      else if(val === "twisted"){
+        ribDesc.textContent = "Più compatto ed elastico. Il bordo resta definito nel tempo e dà un effetto più raffinato.";
+      }
+      else{
+        ribDesc.textContent = "";
+      }
+    });
+
+    // -------------------------
+    // 4) PREVIEW FILATO + LINK
+    // -------------------------
+    const yarnSelect = document.getElementById("yarn");
+    const yarnImg = document.getElementById("yarnImg");
+    const yarnHint = document.getElementById("yarnHint");
+    const yarnImgPath = document.getElementById("yarnImgPath");
+    const yarnLink = document.getElementById("yarnLink");
+
+    const YARN_URL = {
+      baby: "https://lindehobby.it/drops-128/drops-baby-merino-p108?_gl=1*vr8sjl*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzIEIcjAJaFt5XEfnfi72xItZiT_9VJi3eHH0TppDfVHSfo6hkRDR8caAm5FEALw_wcB&gbraid=0AAAAAodwrBoYYctz1KInYCjUQ8wNzQAzq",
+      lima: "https://lindehobby.it/filato-127/drops-lima-p130?_gl=1*vr8sjl*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzIEIcjAJaFt5XEfnfi72xItZiT_9VJi3eHH0TppDfVHSfo6hkRDR8caAm5FEALw_wcB&gbraid=0AAAAAodwrBoYYctz1KInYCjUQ8wNzQAzq",
+      air: "https://lindehobby.it/drops-128/drops-air-p106?_gl=1*1mygi4u*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzIEIcjAJaFt5XEfnfi72xItZiT_9VJi3eHH0TppDfVHSfo6hkRDR8caAm5FEALw_wcB&gbraid=0AAAAAodwrBoYYctz1KInYCjUQ8wNzQAzq",
+      alpaca: "https://lindehobby.it/drops-128/drops-alpaca-p215?_gl=1*105tp2*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzIEIcjAJaFt5XEfnfi72xItZiT_9VJi3eHH0TppDfVHSfo6hkRDR8caAm5FEALw_wcB&gbraid=0AAAAAodwrBoYYctz1KInYCjUQ8wNzQAzq",
+      puna: "https://lindehobby.it/drops-128/drops-puna-p635?_gl=1*19y0jq1*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzIEIcjAJaFt5XEfnfi72xItZiT_9VJi3eHH0TppDfVHSfo6hkRDR8caAm5FEALw_wcB&gbraid=0AAAAAodwrBoYYctz1KInYCjUQ8wNzQAzq",
+      karisma: "https://lindehobby.it/drops-128/drops-karisma-p119?gad_source=1&gad_campaignid=22217859980&gbraid=0AAAAAodwrBoYYctz1KInYCjUQ8wNzQAzq&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzIEIcjAJaFt5XEfnfi72xItZiT_9VJi3eHH0TppDfVHSfo6hkRDR8caAm5FEALw_wcB#vid:908",
+    };
+
+    function updateYarnPreview(){
+      const y = yarnSelect.value;
+
+      if(!y){
+        yarnImg.style.display = "none";
+        yarnHint.style.display = "block";
+        yarnHint.textContent = "Seleziona un filato per vedere l’anteprima 🧶";
+        yarnLink.style.display = "none";
+        yarnImgPath.textContent = "";
+        return;
+      }
+
+      const filename = `${y}.jpg`;
+      const path = `img/${filename}`;
+      yarnImg.src = path;
+      yarnImg.style.display = "block";
+      yarnHint.style.display = "none";
+      yarnImgPath.textContent = `Anteprima: ${path}`;
+
+      const url = YARN_URL[y];
+      if(url){
+        yarnLink.href = url;
+        yarnLink.style.display = "inline";
+      } else {
+        yarnLink.style.display = "none";
+      }
+    }
+
+    yarnImg.addEventListener("error", () => {
+      yarnImg.style.display = "none";
+      yarnHint.style.display = "block";
+      yarnHint.textContent = "Immagine filato non trovata (controlla i nomi in img/).";
+      yarnImgPath.textContent = "";
+    });
+
+    yarnSelect.addEventListener("change", updateYarnPreview);
+
+    // -------------------------
+    // 5) MODAL + RIEPILOGO + DOWNLOAD
     // -------------------------
     const bust = document.getElementById("bust");
     const lengthCm = document.getElementById("lengthCm");
 
-    const ribType = document.getElementById("ribType");
     const ribLen  = document.getElementById("ribLen");
     const slit    = document.getElementById("slit");
 
@@ -438,7 +523,7 @@
       const neckTxt = neckSelect.value || "—";
       const neckNoteTxt = (neckSelect.value === "other" && neckNotes.value.trim()) ? neckNotes.value.trim() : "—";
 
-      const ribTypeTxt = ribType.value || "—";
+      const ribTxt = rib.value || "—";
       const ribLenTxt  = ribLen.value || "—";
       const slitTxt    = slit.value || "—";
 
@@ -460,9 +545,9 @@ DESIGN
 - Note colletto (se Altro): ${neckNoteTxt}
 
 DETTAGLI
-- Rib type: ${ribTypeTxt}
-- Rib length: ${ribLenTxt}
-- Slit: ${slitTxt}
+- Rib (bordi): ${ribTxt}
+- Lunghezza rib: ${ribLenTxt}
+- Slit laterali: ${slitTxt}
 
 LANA E COLORE
 - Filato: ${yarnTxt}
@@ -472,7 +557,6 @@ Anteprima usata: ${preview}`;
     }
 
     submitBtn.addEventListener("click", () => {
-      // controllo minimo
       if(!fitSelect.value){
         alert("Scegli almeno il Fit 🙂");
         return;
@@ -510,29 +594,8 @@ Anteprima usata: ${preview}`;
     // init
     updatePills();
     updatePreview();
+    updateYarnPreview();
   </script>
-<script>
-const rib = document.getElementById("rib");
-const ribDesc = document.getElementById("ribDesc");
-
-rib.addEventListener("change", () => {
-  const val = rib.value;
-
-  if(val === "1x1"){
-    ribDesc.textContent = "Classico, pulito ed elegante. Tiene bene la forma ed è adatto a uno stile minimal.";
-  }
-  else if(val === "2x2"){
-    ribDesc.textContent = "Più morbido e visibile. Dona un effetto più rilassato e leggermente più elastico.";
-  }
-  else if(val === "twisted"){
-    ribDesc.textContent = "Più compatto ed elastico. Il bordo resta definito nel tempo e dà un effetto più raffinato.";
-  }
-  else{
-    ribDesc.textContent = "";
-  }
-});
-</script>
 
 </body>
 </html>
-
