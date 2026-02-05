@@ -102,7 +102,7 @@
 
 <body>
   <h1>Buon compleanno tesoruccio😘 (+13🥳)</h1>
-  <p class="lead">Benvenuta nella personalizzazione del tuo regalo. Volevi un gilet di lana? Perché comprarne uno fatto da bambini cinesi sfruttati quando puoi sfruttare direttamente me? Approfitta delle mie incredibili skills e scegli le caratteristiche del tuo gilet così posso fartelo personalizzato con tanto amore</p>
+  <p class="lead">Benvenuta nella personalizzazione del tuo regalo. Volevi un gilet di lana? Perché comprarne uno fatto da bambini cinesi sfruttati quando puoi sfruttare direttamente me? Approfitta delle mie incredibili skills, scegli le caratteristiche che vuoi e te ne farò uno con tanto amore <3</p>
 
   <!-- TAGLIA -->
   <h2>Taglia</h2>
@@ -117,23 +117,23 @@
         <option value="M">M</option>
       </select>
 
-      <label>Misure precise (opzionale)</label>
-      <input id="bust" type="number" placeholder="Seno (cm)">
+      <label> Aggiungi tu le misure precise (opzionale)</label>
+      <input id="bust" type="number" placeholder=" vita (cm)">
       <input id="lengthCm" type="number" placeholder="Lunghezza desiderata (cm)">
-      <p class="muted">Se inserisci misure precise, userò queste per personalizzare il pattern. La taglia resta come riferimento.</p>
+      <p class="muted">Solo se non ti soddisfano le taglie sopra</p>
     </div>
 
     <!-- destra -->
     <div>
       <details>
-        <summary style="cursor:pointer; font-weight:600;">📏 Guida alle taglie</summary>
+        <summary style="cursor:pointer; font-weight:600;">Guida alle taglie</summary>
 
         <div style="margin-top:10px; overflow:auto; border:1px solid #e5e5e5; border-radius:12px;">
           <table style="border-collapse:collapse; width:100%; min-width:480px;">
             <thead>
               <tr style="background:#f7f7f7;">
                 <th style="padding:10px; text-align:left;">Taglia</th>
-                <th style="padding:10px; text-align:left;">Misura busto (persona)</th>
+                <th style="padding:10px; text-align:left;">Misura busto (tua)</th>
                 <th style="padding:10px; text-align:left;">Circonferenza busto Regular (capo)</th>
                 <th style="padding:10px; text-align:left;">Circonferenza busto Oversize (capo)</th>
               </tr>
@@ -160,10 +160,6 @@
             </tbody>
           </table>
         </div>
-
-        <p class="muted">
-          La misura busto è la circonferenza del torace della persona. Le altre colonne indicano la circonferenza del gilet finito.
-        </p>
       </details>
     </div>
   </div>
@@ -188,7 +184,7 @@
           <option value="regular">Regular</option>
           <option value="cropped">Cropped</option>
         </select>
-        <p class="muted">Se vuoi una lunghezza specifica, scrivila nella sezione “Taglia / Misure precise”.</p>
+        <p class="muted">Se vuoi una lunghezza specifica, scrivila nella sezione sopra.</p>
 
         <label>Colletto</label>
         <select id="neck">
@@ -199,7 +195,7 @@
         </select>
 
         <label>Note colletto (solo se “Altro”)</label>
-        <input id="neckNotes" type="text" placeholder="es. V più profonda / bordo più alto / ecc.">
+        <input id="neckNotes" type="text" placeholder="es. V più profonda / collo alto tipo dolcevita /...">
       </div>
 
       <!-- DESTRA: preview -->
@@ -227,18 +223,18 @@
   <div class="box">
     <div class="grid2">
       <div>
-        <label>Tipo di rib sui bordi</label>
+        <label>Tipo di lavorazione dei bordi</label>
         <select id="rib">
           <option value="" selected>Scegli...</option>
-          <option value="1x1">Rib 1x1</option>
-          <option value="2x2">Rib 2x2</option>
-          <option value="twisted">Rib twisted</option>
+          <option value="1x1">a coste 1x1</option>
+          <option value="2x2">a coste 2x2</option>
+          <option value="twisted">twisted</option>
         </select>
         <p id="ribDesc" class="hint"></p>
       </div>
 
       <div>
-        <label>Lunghezza rib</label>
+        <label>Lunghezza bordi</label>
         <select id="ribLen">
           <option value="" selected disabled>Scegli…</option>
           <option value="corta">Corta</option>
@@ -247,11 +243,13 @@
       </div>
     </div>
 
-    <label>Slit laterali</label>
+    <label>Spacchi laterali</label>
     <select id="slit">
       <option value="" selected disabled>Scegli…</option>
       <option value="no">No</option>
-      <option value="si">Sì</option>
+      <option value="si">Sì solo lato sx</option>
+      <option value="si">Sì solo lato dx</option>
+      <option value="si">Sì da entrambi i lati</option>
     </select>
   </div>
 
@@ -264,11 +262,11 @@
         <label>Filato</label>
         <select id="yarn">
           <option value="" selected disabled>Scegli…</option>
-          <option value="baby">DROPS Baby Merino — fine, morbida, elastica (look pulito)</option>
-          <option value="lima">DROPS Lima — lana+alpaca, caldo e “adulto”, ottima caduta</option>
+          <option value="baby">DROPS Baby Merino — fine, morbida, elastica (mio maglione fatto da nonna Antonia)</option>
+          <option value="lima">DROPS Lima — lana+alpaca, caldo, ottima caduta</option>
           <option value="air">DROPS Air — soffice e leggero, effetto “nuvola”</option>
-          <option value="alpaca">DROPS Alpaca — come il mio cardigan violetto: drape, cade molto</option>
-          <option value="puna">DROPS Puna — molto morbida, look “premium”, ottima per un gilet caldo ma elegante</option>
+          <option value="alpaca">DROPS Alpaca — come il mio cardigan violetto: drape, fino "cade" molto</option>
+          <option value="puna">DROPS Puna — molto morbida, lana 100%</option>
           <option value="karisma">DROPS Karisma — lana classica e resistente, tiene la forma (più “strutturata”)</option>
         </select>
 
@@ -280,7 +278,7 @@
 
         <label>Colore scelto (scrivilo qui)</label>
         <input id="color" type="text" placeholder="es. 17, Misty Blue / panna / grigio fumo…">
-        <p class="muted">Poi copia qui il nome/codice colore (es. 17, Misty Blue).</p>
+        <p class="muted">Poi copia qui il nome/codice colore.</p>
       </div>
 
       <!-- destra -->
@@ -296,27 +294,25 @@
 
   <!-- CONFERMA -->
   <div class="box" style="margin-top:18px;">
-    <button id="submitBtn">Conferma e genera riepilogo</button>
-    <p class="muted">Alla conferma si apre una finestra con testo copiabile e file scaricabile.</p>
+    <button id="submitBtn">Conferma e invia</button>
+    <p class="muted"></p>
   </div>
 
   <!-- MODAL -->
   <div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); padding:18px;">
     <div style="max-width:560px; margin:10vh auto; background:#fff; border-radius:16px; padding:16px; border:1px solid #e5e5e5;">
-      <h3 style="margin:0 0 8px;">Decisione completata 💛</h3>
-      <p style="margin:0 0 12px; color:#555;">Perfetto! Ora copia il riepilogo e mandamelo.</p>
+      <h3 style="margin:0 0 8px;">Decisione completata! Soddisfatta delle tue scelte?</h3>
+      <p style="margin:0 0 12px; color:#555;">Perfetto! Ora mandami il riepilogo con il tasto in fondo.</p>
 
       <textarea id="finalSummary" style="width:100%; min-height:210px; padding:10px; border-radius:12px; border:1px solid #ddd;"></textarea>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-  <button id="copyFinal">Copia testo</button>
-  <button id="downloadFinal">Scarica file</button>
-  <button id="waBtn">Invia su WhatsApp</button>
+  <button id="waBtn">Clicca per inviare su WhatsApp</button>
   <button id="closeModal">Chiudi</button>
 </div>
 
 <p class="muted" style="margin-top:10px;">
-  Decisa? Scelta confermata? 😌 Clicca “Invia su WhatsApp” e mandami il messaggio.
+  Se non sei soddisfatta delle tue scelte sei ancora in tempo per tornare indietro e cambiare qualcosa :)
 </p>
 
 
@@ -610,5 +606,6 @@ waBtn.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
