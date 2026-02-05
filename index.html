@@ -309,14 +309,18 @@
       <textarea id="finalSummary" style="width:100%; min-height:210px; padding:10px; border-radius:12px; border:1px solid #ddd;"></textarea>
 
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-        <button id="copyFinal">Copia testo</button>
-        <button id="downloadFinal">Scarica file</button>
-        <button id="closeModal">Chiudi</button>
-      </div>
+  <button id="copyFinal">Copia testo</button>
+  <button id="downloadFinal">Scarica file</button>
+  <button id="waBtn">Invia su WhatsApp</button>
+  <button id="closeModal">Chiudi</button>
+</div>
 
-      <p class="muted" style="margin-top:10px;">
-        Tip: puoi incollare questo testo su WhatsApp/Telegram e inviarlo a Vale.
-      </p>
+<p class="muted" style="margin-top:10px;">
+  Decisa? Scelta confermata? 😌 Clicca “Invia su WhatsApp” e mandami il messaggio.
+</p>
+
+
+     
     </div>
   </div>
 
@@ -505,6 +509,8 @@
     const copyFinal = document.getElementById("copyFinal");
     const downloadFinal = document.getElementById("downloadFinal");
     const closeModal = document.getElementById("closeModal");
+    const waBtn = document.getElementById("waBtn");
+
 
     function labelOf(selectEl){
       const i = selectEl.selectedIndex;
@@ -564,6 +570,11 @@ Anteprima usata: ${preview}`;
       finalSummary.value = buildSummary();
       modal.style.display = "block";
     });
+waBtn.addEventListener("click", () => {
+  const text = finalSummary.value || buildSummary(); // usa quello già nel box
+  const waUrl = "https://wa.me/?text=" + encodeURIComponent(text);
+  window.open(waUrl, "_blank");
+});
 
     closeModal.addEventListener("click", () => modal.style.display = "none");
     modal.addEventListener("click", (e) => { if(e.target === modal) modal.style.display = "none"; });
@@ -599,3 +610,4 @@ Anteprima usata: ${preview}`;
 
 </body>
 </html>
+
